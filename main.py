@@ -2,7 +2,6 @@ import os
 import requests
 from supabase import create_client
 from dotenv import load_dotenv
-import time # Add this at the very top of your file
 
 # 1. Load the variables from your .env file
 load_dotenv()
@@ -54,14 +53,6 @@ def fetch_and_save_air_quality(city_name, lat, lon):
         print(f"Something went wrong: {e}")
 
 if __name__ == "__main__":
-    print("Starting the 24/7 Air Quality Monitor...")
-    while True:
-        try:
-            fetch_and_save_air_quality("Baku", 40.40, 49.86)
-            fetch_and_save_air_quality("London", 51.50, -0.12)
-            print("Going to sleep for 1 hour... 💤")
-            time.sleep(3600) # 3600 seconds = 1 hour
-        except KeyboardInterrupt:
-            print("\nPipeline stopped by user.")
-            break    
+    print("Starting one-time air quality sync...")
+    fetch_and_save_air_quality("Baku", 40.40, 49.86)
 
