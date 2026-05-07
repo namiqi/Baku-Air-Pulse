@@ -1,4 +1,4 @@
-# 🌍 Global Air Quality Pipeline (MVP)
+# 🌍 Baku-Air-Pulse (MVP)
 
 A lightweight Data Engineering pipeline that extracts real-time air quality data from the OpenWeather API, transforms the JSON response into a structured format, and loads it into a Supabase (PostgreSQL) database.
 
