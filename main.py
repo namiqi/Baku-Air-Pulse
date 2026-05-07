@@ -1,5 +1,6 @@
 import os
 import requests
+import time
 from supabase import create_client
 from dotenv import load_dotenv
 
@@ -19,6 +20,16 @@ if url:
 
 # Initialize Supabase
 supabase = create_client(url, key)
+
+# Cities around the Caspian Sea for hourly monitoring.
+CITIES = [
+    {"city_name": "Baku", "lat": 40.4, "lon": 49.86},
+    {"city_name": "Sumqayit", "lat": 40.59, "lon": 49.67},
+    {"city_name": "Makhachkala", "lat": 42.98, "lon": 47.50},
+    {"city_name": "Aktau", "lat": 43.65, "lon": 51.17},
+    {"city_name": "Türkmenbaşy", "lat": 40.02, "lon": 52.96},
+    {"city_name": "Bandar-e Anzali", "lat": 37.47, "lon": 49.46},
+]
 
 def fetch_and_save_air_quality(city_name, lat, lon):
     print("Starting the pipeline...")
@@ -55,6 +66,12 @@ def fetch_and_save_air_quality(city_name, lat, lon):
         print(f"Something went wrong: {e}")
 
 if __name__ == "__main__":
-    print("Starting one-time air quality sync...")
-    fetch_and_save_air_quality("Baku", 40.40, 49.86)
+    print("Starting one-time Caspian air quality sync...")
+    for city in CITIES:
+        fetch_and_save_air_quality(
+            city_name=city["city_name"],
+            lat=city["lat"],
+            lon=city["lon"],
+        )
+        time.sleep(1)
 
