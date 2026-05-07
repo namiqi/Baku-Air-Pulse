@@ -43,9 +43,11 @@ def fetch_and_save_air_quality(city_name, lat, lon):
 
         # 6. Loading to Supabase (Simplified for the public schema)
         print(f"Sending {city_name} AQI data to Supabase...")
+        print(f"Payload: {payload}")
         
         # We removed schema="air_quality" to avoid the error
-        supabase.table("logs").insert(payload).execute()
+        insert_response = supabase.table("logs").insert(payload).execute()
+        print(f"Supabase insert response: {insert_response}")
         
         print("Success! Data is now in your database.")
 
